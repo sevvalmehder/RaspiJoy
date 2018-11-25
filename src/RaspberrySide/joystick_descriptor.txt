@@ -1,0 +1,68 @@
+#
+# Information
+#
+
+Byte        Bits         Description
+-------------------------------------
+0         0 dan 7 ye     Y pozisiton
+1         0 dan 7 ye     X position
+2             0          Buton
+
+#
+# Descriptor
+# Bu planlamayı yaptıktan sonra descriptor tool(https://www.usb.org/document-library/hid-descriptor-tool) 
+# kullanarak hexadecimal haline ulaşabilirsiniz.
+# Bu descriptor için hexadecimal hali raspijoy.hid içerisindedir.
+#
+USAGE_PAGE (Generic Desktop),
+USAGE (Joystick),
+COLLECTION (Application),
+	USAGE_PAGE (Generic Desktop),
+	USAGE (Pointer),
+	COLLECTION (Physical),
+		LOGICAL_MINIMUM (-127),
+		LOGICAL_MAXIMUM (127),
+		REPORT_SIZE  (8),
+		REPORT_COUNT (2),
+		USAGE (X),
+		USAGE (Y),
+		INPUT (Data, Variable, Absolute),
+		LOGICAL_MINIMUM (0),
+		LOGICAL_MAXIMUM (1),
+		REPORT_COUNT  (1),
+		REPORT_SIZE  (1),
+		USAGE_PAGE (Button),
+		INPUT (Data, Variable, Absolute)
+	END COLLECTION,
+END COLLECTION 
+
+#
+# Program kullanılırken .hid dosyası oluşturulmadan görülebilen değerler
+#
+\\x05\\x01				// USAGE_PAGE (Generic Desktop),
+\\x09\\x04				// USAGE (Joystick),
+\\xa1\\x01				// COLLECTION (Application),
+\\x05\\x01				// 	 USAGE_PAGE (Generic Desktop),
+\\x09\\x01				// 	 USAGE (Pointer),
+\\xa1\\x00				// 	 COLLECTION (Physical),
+\\x15\\x81				// 		LOGICAL_MINIMUM (-127),
+\\x25\\x7f				// 		LOGICAL_MAXIMUM (127),
+\\x75\\x08				// 		REPORT_SIZE  (8),
+\\x95\\x02				// 		REPORT_COUNT (2),
+\\x09\\x30				// 		USAGE (X),
+\\x09\\x31				//		USAGE (Y),
+\\x81\\x02				//		INPUT (Data, Variable, Absolute),
+\\x15\\x00				//		LOGICAL_MINIMUM (0),
+\\x25\\x01				//		LOGICAL_MAXIMUM (1),
+\\x95\\x01				//		REPORT_COUNT  (1),
+\\x75\\x01				//		REPORT_SIZE  (1),
+\\x05\\x09				//		USAGE_PAGE (Button),
+\\x81\\x02				//		INPUT (Data, Variable, Absolute)
+\\xc0					//	 END COLLECTION,
+\\xc0					// END COLLECTION 
+
+#
+# Scripte yazılacak report descriptor satırı
+#
+
+echo -ne \\x05\\x01\\x09\\x04\\xa1\\x01\\x05\\x01\\x09\\x01\\xa1\\x00\\x15\\x81\\x25\\x7f\\x75\\x08\\x95\\x02\\x09\\x30\\x09\\x31\\x81\\x02\\x15\\x00\\x25\\x01\\x95\\x01\\x75\\x01\\x05\\x09\\x81\\x02\\xc0\\xc0 > functions/hid.usb0/report_desc
