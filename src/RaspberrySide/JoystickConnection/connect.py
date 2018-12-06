@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import RPi.GPIO as GPIO
 import spidev
 import os
 import time
@@ -15,6 +16,18 @@ ch_l_joystick_ver = 1
 ch_r_joystick_hor = 6
 # Right joystick(upper one) vertex movement channel
 ch_r_joystick_ver = 7
+
+# Set raspberry pi pins
+GPIO.setup(2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+# Assign buttons to the variables
+right_button = GPIO.input(2)
+top_button = GPIO.input(3)
+left_button = GPIO.input(4)
+bottom_button = GPIO.input(17)
 
 # Delay in seconds
 delay = 0.1
@@ -47,8 +60,16 @@ while True:
 	rjs_x = readChannel(ch_r_joystick_hor)
 	rjs_y = readChannel(ch_r_joystick_ver)
 
+	# First 4 bit useless for buttons
+	buttons = "0000"
+	# Control buttons actions
+	buttons = buttons + str(1) if right_button else buttons + str(0)
+	buttons = buttons + str(1) if left_button else buttons + str(0)
+	buttons = buttons + str(1) if top_button else buttons + str(0)
+	buttons = buttons + str(1) if bottom_button else buttons + str(0)
+
 	# Joystick will 8 byte data
-	toSendData = "\{x00}\{}\{}\{}\{}".format(
+	toSendData = "\{}\{}\{}\{}\{}".format(buttons,
 		decimal2hex(ljs_x), decimal2hex(ljs_y), decimal2hex(rjs_x), decimal2hex(rjs_y))
 	
 	# print(toSendData)
