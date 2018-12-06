@@ -63,10 +63,10 @@ while True:
 	# First 4 bit useless for buttons
 	buttons = "0000"
 	# Control buttons actions
-	buttons = buttons + str(1) if right_button else buttons + str(0)
-	buttons = buttons + str(1) if left_button else buttons + str(0)
-	buttons = buttons + str(1) if top_button else buttons + str(0)
-	buttons = buttons + str(1) if bottom_button else buttons + str(0)
+	buttons = buttons + str(1) if right_button == False else buttons + str(0)
+	buttons = buttons + str(1) if left_button == False else buttons + str(0)
+	buttons = buttons + str(1) if top_button == False else buttons + str(0)
+	buttons = buttons + str(1) if bottom_button == False else buttons + str(0)
 
 	# Joystick will 8 byte data
 	toSendData = "\{}\{}\{}\{}\{}".format(buttons,
