@@ -53,6 +53,10 @@ def decimal2hex(num):
 	else:
 		return hex(num)
 
+def writeReport(report):
+	with open('/dev/hidg0', 'rb+') as fd:
+		fd.write(report)
+
 while True:
 	# Read joysticks positions 
 	ljs_x = readChannel(ch_l_joystick_hor)
@@ -68,11 +72,14 @@ while True:
 	buttons = buttons + str(1) if top_button == False else buttons + str(0)
 	buttons = buttons + str(1) if bottom_button == False else buttons + str(0)
 
-	# Joystick will 8 byte data
+	# Joystick will 5 byte data
 	toSendData = "\{}\{}\{}\{}\{}".format(buttons,
 		decimal2hex(ljs_x), decimal2hex(ljs_y), decimal2hex(rjs_x), decimal2hex(rjs_y))
 	
 	# print(toSendData)
 	
+	# Send the data 
+	writeReport(toSendData)
+
 	# wait 
 	time.sleep(delay)
