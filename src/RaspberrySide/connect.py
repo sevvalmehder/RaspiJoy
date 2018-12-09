@@ -30,7 +30,7 @@ left_button = GPIO.input(4)
 bottom_button = GPIO.input(17)
 
 # Delay in seconds
-delay = 0.1
+delay = 0.5
 
 # SPI constants
 spi_port = 0
@@ -48,10 +48,10 @@ def readChannel(channel):
 
 def decimal2hex(num):
 	# convert signed decimal number to hexadeicmal
-	if number < 0:
+	if num < 0:
 		return hex((1 << 8) + num)
 	else:
-		return hex(number)
+		return hex(num)
 
 while True:
 	# Read joysticks positions 
