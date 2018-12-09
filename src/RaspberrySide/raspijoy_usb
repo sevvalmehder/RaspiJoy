@@ -8,8 +8,8 @@ echo 0x0100 > bcdDevice # v1.0.0
 echo 0x0200 > bcdUSB # USB2
 mkdir -p strings/0x409
 echo "raspi0123joy" > strings/0x409/serialnumber
-echo "Sevval Mehder" > strings/0x409/manufacturer
-echo "RaspiJoy Joystick" > strings/0x409/product
+echo "RaspiJoy" > strings/0x409/manufacturer
+echo "Joystick" > strings/0x409/product
 mkdir -p configs/c.1/strings/0x409
 echo "Config 1: ECM network" > configs/c.1/strings/0x409/configuration
 echo 250 > configs/c.1/MaxPower
