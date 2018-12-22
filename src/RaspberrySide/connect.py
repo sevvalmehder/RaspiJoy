@@ -26,7 +26,8 @@ ch_rightJS_ver = 7
 delay = 0.5
 
 def readChannel(channel):
-	# read SPI data from MCP3008 given channel
+	# read SPI data from MCP3008 given channel and divide by 2^3 because 
+	# 7 byte data will send except sign bit but the readed data is 10 byte
 	return mcp.read_adc(channel)/8
 
 def writeReport(report):
