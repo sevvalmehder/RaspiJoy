@@ -5,15 +5,19 @@ description: >
 match:
   - 'RaspiJoy Joystick'
 controls:
+    # Channel 1 used for roll channel. Axis 2 is x axis of the right joystick
   - channel: 1
     type: axis
     id: 2
+    # Channel 2 used for pitch channel. Axis 3 is y axis of the right joystick
   - channel: 2
     type: axis
     id: 3
+    # Channel 3 used for throttle channel. Axis 1 y x axis of the left joystick
   - channel: 3
     type: axis
     id: 1
+    # Channel 4 used for yaw channel. Axis 4 is y axis of the left joystick
   - channel: 4
     type: axis
     id: 0
