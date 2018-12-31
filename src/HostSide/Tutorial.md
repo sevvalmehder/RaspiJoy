@@ -41,6 +41,6 @@ One of the buttons control the arm/disarm function. To use this function, the va
 ```
 	> param set RC7_OPTION 41
 ```
-More functions can be assigned this button. All this functions were contained in the (Complete Parameter List Documentation)[http://ardupilot.org/copter/docs/parameters.html#ch7-opt-channel-7-option].
+More functions can be assigned this button. All this functions were contained in the [Complete Parameter List Documentation](http://ardupilot.org/copter/docs/parameters.html#ch7-opt-channel-7-option).
 
 
