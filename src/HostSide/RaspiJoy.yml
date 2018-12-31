@@ -22,15 +22,8 @@ controls:
     type: axis
     id: 0
 
-    # For buttons
-  - channel: 5
-    type: multibutton
-    buttons:
-      - id: 0
-        value: 1200
-      - id: 1
-        value: 1300
-      - id: 2
-        value: 1400
-      - id: 3
-        value: 1500
+    # Channel 7 used for arm/disarm. This configuration maps the button id 3 to channel 7.
+    # The value of RC7_OPTION parameter must be 41 for arm/disarm function.
+  - channel: 7
+    type: button
+    id: 3

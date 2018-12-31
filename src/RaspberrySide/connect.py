@@ -42,6 +42,9 @@ val_but2 = 2
 val_but3 = 4
 val_but4 = 8
 
+# Keep button 1 pressed value
+but4Pressed = False
+
 # Delay in seconds
 delay = 0.1
 
@@ -70,8 +73,18 @@ while True:
 	if not GPIO.input(25):
 		buttonInfo += val_but3
 	if not GPIO.input(12):
+		# If not pressed button4, press
+		# If pressed, release
+		if not but4Pressed:
+			but4Pressed = True
+		else:
+			but4Pressed = False
 		buttonInfo += val_but4
 
+	# If button4 already pressed, add the value of button4
+	if but4Pressed:
+		buttonInfo += val_but4
+		
 	# Joystick will send 5 byte data
 	toSendData = chr(buttonInfo) + chr(ljs_x) + chr(ljs_y) + chr(rjs_x) + chr(rjs_y)
 	
