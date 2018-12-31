@@ -22,6 +22,23 @@ controls:
     type: axis
     id: 0
 
+    # This maps the 0 1 and 2 buttons onto channel 5, providing a convenient way
+    # to select between three different flight modes.
+    # These values are pwm values.
+    # 1200 for circle, 140 for rtl, 1500 for auto
+  - channel: 5
+    type: multibutton
+    buttons:
+        # Stabilize mode
+      - id: 0
+        value: 1800
+        # Loiter mode
+      - id: 1
+        value: 1700
+        # Land mode
+      - id: 2
+        value: 1300
+
     # Channel 7 used for arm/disarm. This configuration maps the button id 3 to channel 7.
     # The value of RC7_OPTION parameter must be 41 for arm/disarm function.
   - channel: 7
