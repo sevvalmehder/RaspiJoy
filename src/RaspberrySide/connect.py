@@ -79,7 +79,6 @@ while True:
 			but4Pressed = True
 		else:
 			but4Pressed = False
-		buttonInfo += val_but4
 
 	# If button4 already pressed, add the value of button4
 	if but4Pressed:
