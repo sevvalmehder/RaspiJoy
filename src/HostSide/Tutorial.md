@@ -5,6 +5,9 @@ without needing to patch mavproxy itself.
 
 A joystick definition([RaspiJoy.yml](https://github.com/sevvalmehder/RaspiJoy/blob/master/src/HostSide/RaspiJoy.yml)) be located either inside the MAVProxy python module in the joysticks directory.
 
+# Modify the joystick mode init file 
+MAVProxy uses __init__.py file to load joysticks. RaspiJoy has a option that use the definition of other well-known joysticks. Because of this feature this init file must be modified. The modified init file([__init__.py](https://github.com/sevvalmehder/RaspiJoy/blob/master/src/HostSide/__init__.py)) be located either inside the MAVProxy python module in the mavproxy_joystick directory.
+
 # For starting simulator
 
 1) Open a terminal and go to the Gazebo directory
@@ -16,23 +19,19 @@ A joystick definition([RaspiJoy.yml](https://github.com/sevvalmehder/RaspiJoy/bl
 ```
 	$ gazebo --verbose worlds/iris_arducopter_runway.world
 ```
-3) Open a new terminal and go to ArduCopter directory
 
-```
-	$ cd ~/ardupilot/ArduCopter
-```
-
-4) Reload the path (log-out and log-in to make permanent)
+3) Reload the path (log-out and log-in to make permanent)
 ```
 	$ . ~/.profile
 ```
-
-5) Start SITL using --map and --console options
+4) Execute startSim.py python file to make joystick selection and start the SITL
 ```
-	$ sim_vehicle.py -v ArduCopter -f gazebo-iris --map --console
+	$ python startSim.py
 ```
 
 # Load the joystick
+
+When SITL running, load joystick using MAVProxy command
 ```
 	$ module load joystick
 ```
